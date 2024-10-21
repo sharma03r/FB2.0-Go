@@ -1,0 +1,47 @@
+inbound_directories:
+  - "./input"
+regex_to_destinations:
+  - pattern: "KA_.*"
+    destinations:
+      - host: "your.server.address"
+        username: "username"
+        remote_path: "/remote/path"
+ssh_key_path: "./id_rsa"
+concurrency_limits:
+  default:
+    large_file_limit: 4
+    small_file_limit: 40
+  server_overrides:
+    your.server.address:
+      large_file_limit: 2
+      small_file_limit: 30
+error_codes:
+  file_errors:
+    general: 300
+    corruption_detected: 301
+    duplicate_detected: 302
+    rename_failed: 303
+    permission_denied: 304
+    directory_not_found: 305
+  database_errors:
+    general: 310
+    connection_failed: 311
+    execution_failed: 312
+    write_failure: 314
+  transfer_errors:
+    general: 320
+    ssh_connection_failed: 321
+    transfer_interrupted: 322
+    command_execution_failed: 323
+    auth_failed: 324
+    host_key_verification_failed: 325
+  config_errors:
+    parsing_failed: 331
+  network_errors:
+    timeout: 341
+    unreachable: 342
+  metrics_errors:
+    statsd_init_failed: 351
+directories: # New additions
+  staging: "./staging"
+  error: "./error"
